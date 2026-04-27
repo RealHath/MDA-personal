@@ -95,8 +95,29 @@
             "type": "Click"
         },
         "next": [
+            "[JumpBack]CheerReward",
             "MatchFlag"
         ]
+    },
+    "CheerReward": {
+        "desc": "应援奖励",
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    596,
+                    559,
+                    95,
+                    30
+                ],
+                "expected": [
+                    "点击进行下一步"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "MatchFlag": {
         "desc": "比赛的标识",
