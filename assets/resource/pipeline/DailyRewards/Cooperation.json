@@ -1,0 +1,88 @@
+{
+    "Cooperation": {
+        "desc": "协同作战入口",
+        "next": [
+            "CooperationStart",
+            "EndTask"
+        ]
+    },
+    "CooperationStart": {
+        "desc": "协同作战",
+        "next": [
+            "CooperationSearch",
+            "[JumpBack]SlideBanner",
+            "EndTask"
+        ]
+    },
+    "SlideBanner": {
+        "max_hit": 10,
+        "desc": "滑动横幅",
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    20,
+                    80
+                ],
+                "end": [
+                    160,
+                    80
+                ],
+                "end_hold": 300
+            }
+        },
+        "next": []
+    },
+    "CooperationSearch": {
+        "desc": "寻找协同作战",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    96,
+                    55,
+                    66,
+                    59
+                ],
+                "template": [
+                    "Cooperation.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "CooperationUnable"
+        ]
+    },
+    "CooperationUnable": {
+        "desc": "无法进行协同作战",
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    1095,
+                    541,
+                    163,
+                    47
+                ],
+                "lower": [
+                    35,
+                    35,
+                    35
+                ],
+                "upper": [
+                    50,
+                    50,
+                    50
+                ],
+                "count": 3000
+            }
+        },
+        "next": [
+            "EnterHall"
+        ]
+    }
+}
