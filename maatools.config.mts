@@ -5,6 +5,11 @@ const config: FullConfig = {
     maaVersion: "latest",
     interfacePath: "assets/interface.json",
     check: {},
+    vscode: {
+        agents: {
+            "agent/go-service": "launch-go-agent",
+        },
+    },
 };
 
 export default config;
