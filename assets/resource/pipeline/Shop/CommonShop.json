@@ -66,7 +66,7 @@
                     26
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -139,7 +139,7 @@
                     250
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },

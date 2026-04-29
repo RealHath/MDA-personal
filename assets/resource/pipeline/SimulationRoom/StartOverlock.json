@@ -193,7 +193,7 @@
                     131
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },
@@ -243,7 +243,7 @@
                     95
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },

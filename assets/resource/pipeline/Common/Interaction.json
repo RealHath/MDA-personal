@@ -32,7 +32,7 @@
                     250
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },
@@ -53,10 +53,10 @@
                     311
                 ],
                 "template": [
-                    "CloseButton.png",
-                    "CloseButton2.png",
-                    "CloseButton3.png",
-                    "CloseButton4.png"
+                    "Common/CloseButton.png",
+                    "Common/CloseButton2.png",
+                    "Common/CloseButton3.png",
+                    "Common/CloseButton4.png"
                 ],
                 "green_mask": true
             }
@@ -77,7 +77,7 @@
                     125
                 ],
                 "template": [
-                    "MAX.png"
+                    "Common/MAX.png"
                 ]
             }
         },

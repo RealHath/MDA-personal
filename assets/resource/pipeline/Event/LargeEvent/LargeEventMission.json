@@ -12,7 +12,7 @@
                     107
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -63,7 +63,7 @@
                     59
                 ],
                 "template": [
-                    "PassRedDot.png"
+                    "Common/PassRedDot.png"
                 ]
             }
         },

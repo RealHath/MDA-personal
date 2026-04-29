@@ -11,7 +11,7 @@
                     27
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -42,7 +42,7 @@
                     227
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ],
                 "threshold": 0.8
             }

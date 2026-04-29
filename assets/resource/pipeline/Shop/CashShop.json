@@ -112,7 +112,7 @@
                     91
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ],
                 "order_by": "Vertical",
                 "index": -1

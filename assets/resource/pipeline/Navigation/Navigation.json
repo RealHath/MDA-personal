@@ -28,7 +28,7 @@
                     37
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },
@@ -48,7 +48,7 @@
                     40
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },
@@ -68,7 +68,7 @@
                     116
                 ],
                 "template": [
-                    "ServerChoose.png"
+                    "Common/ServerChoose.png"
                 ]
             }
         },
@@ -96,7 +96,7 @@
                     32
                 ],
                 "template": [
-                    "HomeButton.png"
+                    "Common/HomeButton.png"
                 ]
             }
         },
@@ -279,7 +279,7 @@
                     25
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         }
@@ -296,7 +296,7 @@
                     35
                 ],
                 "template": [
-                    "Bell.png"
+                    "Common/Bell.png"
                 ]
             }
         }

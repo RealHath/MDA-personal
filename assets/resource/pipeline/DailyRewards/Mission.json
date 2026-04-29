@@ -19,7 +19,7 @@
                     20
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -52,7 +52,7 @@
                     28
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },

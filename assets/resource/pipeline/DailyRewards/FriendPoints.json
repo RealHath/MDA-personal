@@ -19,8 +19,8 @@
                     32
                 ],
                 "template": [
-                    "RedDot.png",
-                    "New.png"
+                    "Common/RedDot.png",
+                    "Common/New.png"
                 ]
             }
         },
@@ -52,7 +52,7 @@
                     19
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -84,7 +84,7 @@
                     33
                 ],
                 "template": [
-                    "ConfirmWithCircle.png"
+                    "Common/ConfirmWithCircle.png"
                 ]
             }
         },

@@ -19,8 +19,8 @@
                     66
                 ],
                 "template": [
-                    "RedDot.png",
-                    "PassRedDot.png"
+                    "Common/RedDot.png",
+                    "Common/PassRedDot.png"
                 ]
             }
         },
@@ -42,7 +42,7 @@
                     66
                 ],
                 "template": [
-                    "PassRedDot.png"
+                    "Common/PassRedDot.png"
                 ]
             }
         },
@@ -71,7 +71,7 @@
                     66
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
@@ -107,7 +107,7 @@
                     19
                 ],
                 "template": [
-                    "RedDot.png"
+                    "Common/RedDot.png"
                 ]
             }
         },
