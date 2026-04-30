@@ -184,7 +184,133 @@ FlagInMission
 
 页面状态应描述“处于哪个页面”或“哪个 UI 对象可见”，而不是描述内部标记。
 
-不要过度解耦页面状态节点。`Visible` 节点只有在被多个流程复用、作为 `And` / `Or` 子条件复用，或需要被 `pipeline_override` 单独控制时，才有必要独立存在。若页面状态只服务于单个进入页面节点，应优先并入该进入页面节点，避免产生只被使用一次的中转检测节点。
+不要过度解耦页面状态节点。`Visible` 节点只有在被多个流程复用、作为 `And` / `Or` 子条件复用、作为进入成功哨兵节点，或需要被 `pipeline_override` 单独控制时，才有必要独立存在。若页面状态只服务于单个进入页面节点，且不承担确认进入成功、失败重试或流程出口职责，应优先并入该进入页面节点，避免产生只被使用一次的中转检测节点。
+
+典型的过度解耦：`Visible` 只被一个点击节点引用，且该点击节点的 `And.all_of` 只有这一个子条件。此时 `Visible` 节点没有复用价值，也没有组合识别价值，应将识别条件直接合并到点击节点中。
+
+不推荐：
+
+```json
+{
+    "EventRedDotVisible": {
+        "desc": "活动红点",
+        "recognition": {
+            "type": "TemplateMatch"
+        }
+    },
+    "EventClickRedDot": {
+        "desc": "点击活动红点",
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "EventRedDotVisible"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    }
+}
+```
+
+推荐：
+
+```json
+{
+    "EventClickRedDot": {
+        "desc": "点击活动红点",
+        "recognition": {
+            "type": "TemplateMatch"
+        },
+        "action": {
+            "type": "Click"
+        }
+    }
+}
+```
+
+#### 进入成功哨兵节点
+
+进入成功哨兵节点用于在点击入口后确认是否已经进入目标页面，统一使用 `Entered` 后缀：
+
+```text
+<Domain><Page>Entered
+```
+
+它通常不执行动作，也没有后继节点；当它在 `next` 中命中时，表示进入流程已经完成，当前子流程自然结束。若未命中，则由后续节点继续重试进入动作或处理异常。
+
+典型写法：
+
+```json
+{
+    "ShopEnterArenaShop": {
+        "desc": "进入竞技场商店",
+        "recognition": {
+            "type": "TemplateMatch"
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ShopArenaShopEntered",
+            "ShopEnterArenaShop"
+        ]
+    },
+    "ShopArenaShopEntered": {
+        "desc": "已进入竞技场商店",
+        "recognition": {
+            "type": "OCR"
+        }
+    }
+}
+```
+
+上例中，`ShopArenaShopEntered` 是进入成功哨兵节点：如果识别到竞技场商店页面，进入流程结束；如果识别不到，则继续执行 `ShopEnterArenaShop` 重新尝试进入。
+
+也可以通过流程节点间接确认进入成功：
+
+```json
+{
+    "ShopEnterMainPage": {
+        "desc": "进入商店主页",
+        "recognition": {
+            "type": "OCR"
+        },
+        "action": {
+            "type": "Click"
+        },
+        "next": [
+            "ShopMainPageFlow",
+            "ShopEnterMainPage"
+        ]
+    },
+    "ShopMainPageFlow": {
+        "next": [
+            "ShopMainPageEntered",
+            "ShopPurchaseItemFlow"
+        ]
+    },
+    "ShopMainPageEntered": {
+        "desc": "已进入商店主页",
+        "recognition": {
+            "type": "OCR"
+        }
+    }
+}
+```
+
+这种情况下，`ShopMainPageEntered` 虽然只被 `ShopMainPageFlow` 使用，但它承担的是进入成功确认职责，不应仅因引用次数少就判定为过度解耦。
+
+识别进入成功哨兵节点时，应优先检查控制流语义，而不是只看引用次数：
+
+1. 是否位于进入/打开/点击节点的 `next` 成功分支中。
+2. 后续是否存在当前进入节点自身，表示未进入时重试。
+3. 是否作为成功分支流程的首个页面状态检查。
+4. 命中后是否用于结束当前进入子流程，或进入后续业务流程。
+
+`Entered` 只用于表达“某个进入动作已经成功完成”。若节点用于可复用的普通页面状态判断，而不是进入动作的成功出口，则继续使用 `On...Page`，例如 `ShopOnArenaShopPage`、`NavigationOnHomePage`。若检测对象不是完整页面，而是弹窗、按钮、红点、图标等 UI 对象，则使用 `Visible`，例如 `CommonRewardDialogVisible`、`DailyTaskRedDotVisible`。
 
 ### 纯检测节点
 
