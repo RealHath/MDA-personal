@@ -58,7 +58,7 @@
             "ArkEnterArena"
         ]
     },
-    "ArenaCornerVisible": {
+    "ArenaMainPageEntered": {
         "desc": "处于竞技场",
         "recognition": {
             "type": "OCR",
@@ -78,7 +78,7 @@
     "ArenaCornerFlow": {
         "desc": "处于竞技场",
         "next": [
-            "ArenaCornerVisible",
+            "ArenaMainPageEntered",
             "ArenaEnterRookieArena",
             "ArenaEnterSpecialArena",
             "ArenaEnterChampionArena",

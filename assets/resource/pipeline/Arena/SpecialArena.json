@@ -18,7 +18,7 @@
             "SpecialArenaCornerFlow"
         ]
     },
-    "SpecialArenaCornerVisible": {
+    "SpecialArenaMainPageEntered": {
         "desc": "处于特殊竞技场",
         "recognition": {
             "type": "OCR",
@@ -38,7 +38,7 @@
     "SpecialArenaCornerFlow": {
         "desc": "处于特殊竞技场",
         "next": [
-            "SpecialArenaCornerVisible",
+            "SpecialArenaMainPageEntered",
             "[JumpBack]ArenaFreeBattle",
             "ArenaCornerFlow",
             "[JumpBack]CommonGoBack"

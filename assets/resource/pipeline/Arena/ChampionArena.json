@@ -18,7 +18,7 @@
             "ChampionArenaCornerFlow"
         ]
     },
-    "ChampionArenaCornerVisible": {
+    "ChampionArenaMainPageEntered": {
         "desc": "处于冠军竞技场",
         "recognition": {
             "type": "OCR",
@@ -39,7 +39,7 @@
     "ChampionArenaCornerFlow": {
         "desc": "处于冠军竞技场",
         "next": [
-            "ChampionArenaCornerVisible",
+            "ChampionArenaMainPageEntered",
             "ChampionArenaEnterChampionsDuel",
             "ArenaCornerFlow",
             "[JumpBack]CommonGoBack"
@@ -89,7 +89,7 @@
             "type": "Click"
         }
     },
-    "CompetitionNameCornerVisible": {
+    "ChampionArenaCompetitionEntered": {
         "desc": "比赛的标识",
         "recognition": {
             "type": "OCR",
@@ -111,7 +111,7 @@
     "ChampionArenaCompetitionFlow": {
         "desc": "比赛的标识",
         "next": [
-            "CompetitionNameCornerVisible",
+            "ChampionArenaCompetitionEntered",
             "CheerUp"
         ]
     },
