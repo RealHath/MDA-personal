@@ -30,8 +30,8 @@
             "ArkEnterInterception"
         ]
     },
-    "InterceptionCornerVisible": {
-        "desc": "处于拦截战",
+    "InterceptionMainPageEntered": {
+        "desc": "已进入拦截战",
         "recognition": {
             "type": "OCR",
             "param": {
@@ -49,26 +49,19 @@
     },
     "InterceptionBattleFlow": {
         "desc": "拦截战流程",
-        "next": [
-            "InterceptionClickCorner",
-            "NormalInterception",
-            "AnomalyInterception",
-            "BaseEndTask"
-        ]
-    },
-    "InterceptionClickCorner": {
-        "desc": "处于拦截战",
         "recognition": {
             "type": "And",
             "param": {
                 "all_of": [
-                    "InterceptionCornerVisible"
+                    "InterceptionMainPageEntered"
                 ]
             }
         },
-        "action": {
-            "type": "Click"
-        }
+        "next": [
+            "NormalInterception",
+            "AnomalyInterception",
+            "BaseEndTask"
+        ]
     },
     "ManualInterceptionBattle": {
         "desc": "手动拦截战",
