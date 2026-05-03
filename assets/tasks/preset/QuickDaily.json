@@ -4,7 +4,6 @@
             "name": "QuickDaily",
             "label": "$preset.QuickDaily.label",
             "description": "$preset.QuickDaily.description",
-            "default_check": true,
             "task": [
                 {
                     "name": "CashShop",
@@ -18,7 +17,9 @@
                     "option": {
                         "CommonShopFreeGoods": "Yes",
                         "CommonShopCoreDustCase": "Yes",
-                        "RecyclingShopList": ["Gem"]
+                        "RecyclingShopList": [
+                            "Gem"
+                        ]
                     }
                 },
                 {
