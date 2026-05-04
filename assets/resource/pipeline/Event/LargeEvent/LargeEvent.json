@@ -27,8 +27,7 @@
         },
         "next": [
             "LargeEventMainPageFlow",
-            "LargeEventEntry",
-            "[JumpBack]CommonClickBlank"
+            "LargeEventEntry"
         ]
     },
     "LargeEventMainPageEntered": {
