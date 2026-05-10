@@ -95,7 +95,8 @@
         "repeat": 3,
         "repeat_delay": 500,
         "next": [
-            "LargeEventStarAnisMerchLotteryClick"
+            "LargeEventStarAnisMerchLotteryClick",
+            "LargeEventStarAnisPlayMerchLotteryClick"
         ]
     },
     "LargeEventStarAnisLotteryComplete": {
