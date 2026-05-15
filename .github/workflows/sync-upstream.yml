@@ -58,8 +58,11 @@ jobs:
           git push origin main
 
           # 创建 tag 推送，触发 install.yml 自动打包发布
+          # fetch upstream --tags 后 tag 可能已在本地，先检查再创建
           TAG=${{ steps.check.outputs.tag }}
-          git tag "$TAG"
+          if ! git tag | grep -q "^${TAG}$"; then
+            git tag "$TAG"
+          fi
           git push origin "$TAG"
 
       - name: Done
