@@ -1,0 +1,69 @@
+name: Sync Upstream Release
+
+on:
+  schedule:
+    - cron: '3 9 * * *'  # 每天 9:03 检查一次
+  workflow_dispatch:
+
+jobs:
+  check-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check upstream release
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          UPSTREAM_TAG=$(gh release view --repo 1204244136/MDA --json tagName --jq .tagName 2>/dev/null || echo "")
+          if [ -z "$UPSTREAM_TAG" ] || [ "$UPSTREAM_TAG" = "null" ]; then
+            echo "No upstream release found"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Upstream latest tag: $UPSTREAM_TAG"
+
+          if git tag | grep -q "^${UPSTREAM_TAG}$"; then
+            echo "Already synced at ${UPSTREAM_TAG}"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "New upstream release: ${UPSTREAM_TAG}"
+          echo "should_run=true" >> "$GITHUB_OUTPUT"
+          echo "tag=$UPSTREAM_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Sync upstream code
+        if: steps.check.outputs.should_run == 'true'
+        run: |
+          git remote add upstream https://github.com/1204244136/MDA.git
+          git fetch upstream --tags
+          git checkout main
+
+          # 合并上游代码，自动处理 action.go 冲突（保留我们去掉验证的版本）
+          if git merge upstream/main --no-edit; then
+            echo "Merge succeeded"
+          else
+            echo "Merge conflicts detected, auto-resolving action.go"
+            git checkout --ours -- agent/go-service/taskersink/membership/action.go
+            git add agent/go-service/taskersink/membership/action.go
+            git commit --no-edit
+          fi
+
+          git push origin main
+
+          # 创建 tag 推送，触发 install.yml 自动打包发布
+          TAG=${{ steps.check.outputs.tag }}
+          git tag "$TAG"
+          git push origin "$TAG"
+
+      - name: Done
+        if: steps.check.outputs.should_run == 'true'
+        run: |
+          echo "✅ Synced and triggered build for ${{ steps.check.outputs.tag }}"
+          echo "⏳ Wait for install.yml to finish the release"
