@@ -8,6 +8,9 @@ on:
 jobs:
   check-and-sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v5
         with:
@@ -65,8 +68,13 @@ jobs:
           fi
           git push origin "$TAG"
 
-      - name: Done
+      - name: Trigger build
         if: steps.check.outputs.should_run == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "✅ Synced and triggered build for ${{ steps.check.outputs.tag }}"
-          echo "⏳ Wait for install.yml to finish the release"
+          TAG=${{ steps.check.outputs.tag }}
+          echo "Triggering install.yml for $TAG..."
+          gh workflow run install.yml --ref "$TAG"
+          echo "✅ Build triggered for $TAG, check it at:"
+          echo "   https://github.com/${{ github.repository }}/actions/workflows/install.yml"
