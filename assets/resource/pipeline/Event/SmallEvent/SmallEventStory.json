@@ -53,6 +53,7 @@
     },
     "SmallEventEventStagePageFlow": {
         "desc": "小活动活动关卡页面流程",
+        "max_hit": 2,
         "recognition": {
             "type": "And",
             "param": {
@@ -106,6 +107,7 @@
         },
         "next": [
             "[JumpBack]BattleStart",
+            "SmallEventEventStagePageFlow",
             "SmallEventGoBack"
         ]
     },
