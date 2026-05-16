@@ -48,6 +48,10 @@ jobs:
           git fetch upstream --no-tags
           git checkout main
 
+          # 配置 git 身份，用于 merge/commit
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
           # 合并上游代码，自动处理 action.go 冲突（保留我们去掉验证的版本）
           if git merge upstream/main --no-edit; then
             echo "Merge succeeded"
