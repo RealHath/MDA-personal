@@ -94,74 +94,13 @@ func GetMembershipStatus() *MembershipStatus {
 
 // checkMembership performs the full membership check flow.
 func checkMembership() *MembershipStatus {
-	defaultStatus := &MembershipStatus{
-		MembershipType: "普通用户",
-		UserLevel:      0,
-		IsMember:       false,
+	log.Info().Msg("Membership check bypassed, allowing all users")
+	return &MembershipStatus{
+		MembershipType: "金Doro会员",
+		UserLevel:      3,
+		IsMember:       true,
+		VirtualExpiry:  "99991231",
 	}
-
-	// Debug versions (below 1.0.0) bypass membership verification
-	if isDebugVersion() {
-		log.Info().Str("version", appVersion).Msg("Debug version detected, bypassing membership verification")
-		return &MembershipStatus{
-			MembershipType: "金Doro会员",
-			UserLevel:      3,
-			IsMember:       true,
-			VirtualExpiry:  "99991231",
-		}
-	}
-
-	// Generate device code
-	deviceCode := GenerateDeviceCodeV6()
-	cachedDeviceCode = deviceCode
-	defaultStatus.DeviceCode = deviceCode
-
-	log.Info().
-		Str("cpu_hash", shortHash(deviceCode.CPUHash)).
-		Str("uuid_hash", shortHash(deviceCode.UUIDHash)).
-		Msg("Generated V6 device code")
-
-	// Fetch member data
-	records, err := fetchMemberData()
-	if err != nil {
-		log.Warn().Err(err).Msg("Failed to fetch member data, treating as non-member")
-		return defaultStatus
-	}
-
-	// Match device code
-	record, score := matchDeviceCode(deviceCode, records)
-	if record == nil {
-		log.Info().Msg("No matching member record found")
-		return defaultStatus
-	}
-
-	log.Info().
-		Str("user_id", record.UserID).
-		Int("score", score).
-		Str("tier", record.Tier).
-		Msg("Matched member record")
-
-	// Check for unsupported tiers
-	unsupported := false
-	if unsupportedTiers[record.Tier] {
-		log.Warn().
-			Str("tier", record.Tier).
-			Msg("检测到不再支持的会员等级，该等级在 MDA 中不享受会员功能。请升级至金Doro会员或以上。")
-		unsupported = true
-	}
-
-	// Calculate current membership status
-	status := calculateStatus(record)
-	status.UnsupportedTier = unsupported
-	status.DeviceCode = deviceCode
-
-	// Cache the result
-	cachedStatusMu.Lock()
-	cachedStatus = status
-	cachedDataTime = time.Now()
-	cachedStatusMu.Unlock()
-
-	return status
 }
 
 // fetchMemberData fetches V6 member data from the API.
@@ -191,12 +130,7 @@ func fetchMemberData() ([]MemberRecord, error) {
 
 // fetchFromSource fetches and parses member data from a single URL.
 func fetchFromSource(client *http.Client, url string) ([]MemberRecord, error) {
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Set("User-Agent", "MDA/"+appVersion)
-	resp, err := client.Do(req)
+	resp, err := client.Get(url)
 	if err != nil {
 		return nil, err
 	}
