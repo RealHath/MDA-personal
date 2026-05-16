@@ -22,8 +22,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Prettier & plugin
-        run: npm install -g prettier prettier-plugin-multiline-arrays
+      - name: Install Prettier
+        run: npm install -g prettier
 
       - name: Download JSON schema files from MaaFramework
         run: |
