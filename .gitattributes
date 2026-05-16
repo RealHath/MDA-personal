@@ -5,3 +5,7 @@
 # Isolate binary files in case the auto-detection algorithm fails and
 # marks them as text files (which could brick them).
 *.{png,jpg,jpeg,gif,webp,woff,woff2} binary
+
+# Keep our versions of membership files during upstream merges
+agent/go-service/taskersink/membership/action.go    merge=ours
+agent/go-service/taskersink/membership/memberdata.go merge=ours
