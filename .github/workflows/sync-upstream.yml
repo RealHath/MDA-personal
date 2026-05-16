@@ -79,6 +79,6 @@ jobs:
         run: |
           TAG=${{ steps.check.outputs.tag }}
           echo "Triggering install.yml for $TAG..."
-          gh workflow run install.yml --ref "$TAG"
+          gh workflow run install.yml --repo "${{ github.repository }}" --ref "$TAG"
           echo "✅ Build triggered for $TAG, check it at:"
           echo "   https://github.com/${{ github.repository }}/actions/workflows/install.yml"
