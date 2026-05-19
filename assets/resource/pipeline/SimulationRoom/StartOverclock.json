@@ -1,6 +1,6 @@
 {
     "SimulationRoomStartOverclock": {
-        "desc": "开始超频",
+        "desc": "点击开始超频",
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -28,7 +28,8 @@
         },
         "next": [
             "[JumpBack]SimulationRoomOpenBiosSetting",
-            "SimulationRoomBeginOverclockSimulation"
+            "SimulationRoomBeginOverclockSimulation",
+            "SimulationRoomStartOverclock"
         ]
     },
     "SimulationRoomOpenBiosSetting": {
