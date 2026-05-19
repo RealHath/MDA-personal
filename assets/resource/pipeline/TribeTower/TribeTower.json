@@ -109,7 +109,8 @@
         },
         "post_wait_freezes": 500,
         "next": [
-            "TribeTowerBattleFlow"
+            "TribeTowerBattleFlow",
+            "TribeTowerChooseStage"
         ]
     },
     "TribeTowerBattleFlow": {
