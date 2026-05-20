@@ -67,6 +67,18 @@ jobs:
             git commit --no-edit
           fi
 
+          # 合并完成后，选择性覆盖 interface.json 中 fork 特有的字段
+          # 保留上游对 interface.json 的其他修改（新增 controller、resource 等），只覆盖我们自己的字段
+          node -e "
+            const fs = require('fs');
+            const path = 'assets/interface.json';
+            const cfg = JSON.parse(fs.readFileSync(path, 'utf8'));
+            cfg.github = 'https://github.com/RealHath/MDA-personal';
+            fs.writeFileSync(path, JSON.stringify(cfg, null, 4) + '\n');
+          "
+          git add assets/interface.json
+          git commit --no-edit -m "chore: preserve fork interface.json fields" || true
+
           git push origin main
 
           # 创建 tag 推送，触发 install.yml 自动打包发布
