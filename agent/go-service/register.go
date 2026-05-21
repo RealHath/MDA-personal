@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/1204244136/MDA/agent/go-service/common/myaction"
-	"github.com/1204244136/MDA/agent/go-service/common/myreco"
-	"github.com/1204244136/MDA/agent/go-service/pkg/resource"
-	"github.com/1204244136/MDA/agent/go-service/taskersink/aspectratio"
-	"github.com/1204244136/MDA/agent/go-service/taskersink/hdrcheck"
-	"github.com/1204244136/MDA/agent/go-service/taskersink/membership"
-	"github.com/1204244136/MDA/agent/go-service/taskersink/processcheck"
+	"github.com/RealHath/MDA-personal/agent/go-service/common/myaction"
+	"github.com/RealHath/MDA-personal/agent/go-service/common/myreco"
+	"github.com/RealHath/MDA-personal/agent/go-service/pkg/resource"
+	"github.com/RealHath/MDA-personal/agent/go-service/taskersink/aspectratio"
+	"github.com/RealHath/MDA-personal/agent/go-service/taskersink/hdrcheck"
+	"github.com/RealHath/MDA-personal/agent/go-service/taskersink/membership"
+	"github.com/RealHath/MDA-personal/agent/go-service/taskersink/processcheck"
 	"github.com/rs/zerolog/log"
 )
 

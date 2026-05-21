@@ -3,8 +3,8 @@ package processcheck
 import (
 	"strings"
 
-	"github.com/1204244136/MDA/agent/go-service/pkg/i18n"
-	"github.com/1204244136/MDA/agent/go-service/pkg/maafocus"
+	"github.com/RealHath/MDA-personal/agent/go-service/pkg/i18n"
+	"github.com/RealHath/MDA-personal/agent/go-service/pkg/maafocus"
 	"github.com/MaaXYZ/maa-framework-go/v4"
 	"github.com/rs/zerolog/log"
 )
