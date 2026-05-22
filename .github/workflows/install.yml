@@ -253,8 +253,8 @@ jobs:
 
       - run: |
           cd assets
-          for d in */; do
-            (cd "$d" && zip -r "../${d%/}.zip" .)
+          for f in *; do
+            (cd "$f" && zip -r "../$f.zip" .)
           done
 
       - uses: softprops/action-gh-release@v2
