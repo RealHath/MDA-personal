@@ -82,7 +82,13 @@ jobs:
 
   install:
     needs: meta
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os == 'win' && 'windows-latest' || (matrix.os == 'macos' &&
+      'macos-latest' || 'ubuntu-latest') }}
+    strategy:
+      matrix:
+        os: [ win, macos, linux ]
+        arch: [ x86_64, aarch64 ]
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v5
@@ -101,24 +107,26 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
-          fileName: "MAA-win-x86_64*"
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
           latest: ${{ env.MAAFW_VERSION == '' }}
           tag: ${{ env.MAAFW_VERSION }}
           out-file-path: "deps"
           extract: true
 
       - name: Download MXU
+        if: ${{ !(matrix.os == 'linux' && matrix.arch == 'aarch64') }}
         id: download_mxu
         uses: robinraju/release-downloader@v1
         with:
           repository: MistEO/MXU
-          fileName: "*win-x86_64*"
+          fileName: "*${{ matrix.os }}-${{ matrix.arch }}*"
           latest: ${{ env.MXU_VERSION == '' }}
           tag: ${{ env.MXU_VERSION }}
           out-file-path: "MXU"
           extract: true
 
       - name: Clean up MXU archive
+        if: ${{ !(matrix.os == 'linux' && matrix.arch == 'aarch64') }}
         shell: bash
         run: |
           ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mxu.outputs.downloaded_files)[0] }}"
@@ -136,7 +144,7 @@ jobs:
         run: |
           cd tools/
           python -m pip install -r ./requirements.txt
-          python ./install.py --build-go-only ${{ needs.meta.outputs.tag }} win x86_64
+          python ./install.py --build-go-only ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
           cd ..
 
       - name: Install
@@ -144,17 +152,18 @@ jobs:
         run: |
           cd tools/
           python -m pip install -r ./requirements.txt
-          python ./install.py ${{ needs.meta.outputs.tag }} win x86_64
+          python ./install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
           cd ..
 
       - name: Integrate MXU into install directory
+        if: ${{ !(matrix.os == 'linux' && matrix.arch == 'aarch64') }}
         shell: bash
         run: |
           if [ -d "MXU" ]; then
             echo "Integrating MXU into install directory..."
 
             # 先把 MXU 可执行文件统一落到最终命名，避免后续步骤改错目标文件
-            if [[ "${{ runner.os }}" == "Windows" ]]; then
+            if [[ "${{ matrix.os }}" == "win" ]]; then
               if [ -f "MXU/mxu.exe" ]; then
                 cp "MXU/mxu.exe" "install/MDA.exe"
                 echo "Copied MXU executable to install/MDA.exe"
@@ -178,6 +187,7 @@ jobs:
           fi
 
       - name: Convert PNG to ICO
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: bash
         run: |
           choco install imagemagick -y
@@ -185,6 +195,7 @@ jobs:
           cp MDA.ico install/logo.ico
 
       - name: Modify MXU exe icon
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: bash
         run: |
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
@@ -212,7 +223,7 @@ jobs:
 
       - uses: actions/upload-artifact@v6
         with:
-          name: MDA-${{ needs.meta.outputs.tag }}
+          name: MDA-${{ matrix.os }}-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: "install"
           retention-days: 1
 
