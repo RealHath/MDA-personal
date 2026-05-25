@@ -2,7 +2,7 @@ name: Sync Upstream Release
 
 on:
   schedule:
-    - cron: '0 2,14 * * *'  # UTC+8 10:00、22:00 各检查一次
+    - cron: '7 13 * * *'  # UTC+8 21:07 检查一次
   workflow_dispatch:
 
 jobs:
