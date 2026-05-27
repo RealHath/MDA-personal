@@ -4,7 +4,13 @@
         "next": [
             "RedDotClearStart",
             "[JumpBack]NavigationEnterHall"
-        ]
+        ],
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RuntimeQuotaCheck"
+            }
+        }
     },
     "RedDotClearStart": {
         "desc": "红点清除",

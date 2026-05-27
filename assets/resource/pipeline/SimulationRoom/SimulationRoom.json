@@ -3,7 +3,13 @@
         "next": [
             "SimulationRoomEnter",
             "[JumpBack]HallEnterArk"
-        ]
+        ],
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RuntimeQuotaCheck"
+            }
+        }
     },
     "SimulationRoomEnter": {
         "desc": "进入模拟室",

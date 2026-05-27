@@ -4,7 +4,13 @@
         "next": [
             "DailyRewardsStart",
             "[JumpBack]NavigationEnterHall"
-        ]
+        ],
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RuntimeQuotaCheck"
+            }
+        }
     },
     "DailyRewardsStart": {
         "desc": "每日奖励",

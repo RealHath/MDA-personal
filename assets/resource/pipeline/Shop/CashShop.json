@@ -3,7 +3,13 @@
         "next": [
             "HallEnterCashShop",
             "[JumpBack]NavigationEnterHall"
-        ]
+        ],
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RuntimeQuotaCheck"
+            }
+        }
     },
     "HallEnterCashShop": {
         "desc": "进入付费商店",

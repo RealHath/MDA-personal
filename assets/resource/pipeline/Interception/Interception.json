@@ -3,7 +3,13 @@
         "next": [
             "ArkEnterInterception",
             "[JumpBack]HallEnterArk"
-        ]
+        ],
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RuntimeQuotaCheck"
+            }
+        }
     },
     "ArkEnterInterception": {
         "desc": "进入拦截战",
