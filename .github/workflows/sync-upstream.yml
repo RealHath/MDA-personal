@@ -57,18 +57,31 @@ jobs:
           git config user.name "github-actions[bot]"
           git config merge.ours.driver true
 
-          # 合并上游代码，自动处理 action.go 冲突（保留我们去掉验证的版本）
+          # 合并上游代码，保留 fork 特有的跳过验证版本
           if git merge upstream/main --no-edit; then
             echo "Merge succeeded"
           else
-            echo "Merge conflicts detected, auto-resolving action.go"
-            git checkout --ours -- agent/go-service/taskersink/membership/action.go
-            git add agent/go-service/taskersink/membership/action.go
+            echo "Merge conflicts detected, auto-resolving fork-specific files"
+            for f in \
+              agent/go-service/taskersink/membership/action.go \
+              agent/go-service/taskersink/membership/register.go; do
+              if [ -f "$f" ]; then
+                git checkout --ours -- "$f"
+                git add "$f"
+              fi
+            done
             git commit --no-edit
           fi
 
-          # 合并完成后，选择性覆盖 interface.json 中 fork 特有的字段
-          # 保留上游对 interface.json 的其他修改（新增 controller、resource 等），只覆盖我们自己的字段
+          # 合并完成后，强制保留 action.go 和 register.go 的 fork 版本
+          for f in \
+            agent/go-service/taskersink/membership/action.go \
+            agent/go-service/taskersink/membership/register.go; do
+            git checkout HEAD~1 -- "$f"
+            git add "$f"
+          done
+
+          # 选择性覆盖 interface.json 中 fork 特有的字段
           node -e "
             const fs = require('fs');
             const path = 'assets/interface.json';
@@ -77,7 +90,7 @@ jobs:
             fs.writeFileSync(path, JSON.stringify(cfg, null, 4) + '\n');
           "
           git add assets/interface.json
-          git commit --no-edit -m "chore: preserve fork interface.json fields" || true
+          git commit --no-edit -m "chore: preserve fork-specific overrides" || true
 
           git push origin main
 

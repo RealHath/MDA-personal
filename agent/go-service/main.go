@@ -5,9 +5,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/RealHath/MDA-personal/agent/go-service/pkg/i18n"
-	"github.com/RealHath/MDA-personal/agent/go-service/pkg/pienv"
-	"github.com/RealHath/MDA-personal/agent/go-service/taskersink/membership"
+	"github.com/1204244136/MDA/agent/go-service/pkg/i18n"
+	"github.com/1204244136/MDA/agent/go-service/pkg/pienv"
+	"github.com/1204244136/MDA/agent/go-service/taskersink/membership"
 	"github.com/MaaXYZ/maa-framework-go/v4"
 	"github.com/rs/zerolog/log"
 )

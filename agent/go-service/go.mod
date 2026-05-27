@@ -1,4 +1,4 @@
-module github.com/RealHath/MDA-personal/agent/go-service
+module github.com/1204244136/MDA/agent/go-service
 
 go 1.25.6
 
