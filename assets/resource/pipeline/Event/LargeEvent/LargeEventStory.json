@@ -1,9 +1,8 @@
 {
     "LargeEventStory": {
-        "timeout": 60000,
-        "max_hit": 1,
         "desc": "大活动剧情",
         "enabled": false,
+        "max_hit": 1,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -22,6 +21,7 @@
         "action": {
             "type": "Click"
         },
+        "timeout": 60000,
         "next": [
             "LargeEventStoryEventPage"
         ]

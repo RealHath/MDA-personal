@@ -1,15 +1,15 @@
 {
     "SimulationRoomMain": {
-        "next": [
-            "SimulationRoomEnter",
-            "[JumpBack]HallEnterArk"
-        ],
         "action": {
             "type": "Custom",
             "param": {
                 "custom_action": "RuntimeQuotaCheck"
             }
-        }
+        },
+        "next": [
+            "SimulationRoomEnter",
+            "[JumpBack]HallEnterArk"
+        ]
     },
     "SimulationRoomEnter": {
         "desc": "进入模拟室",

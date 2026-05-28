@@ -1,16 +1,16 @@
 {
     "RedDotClearMain": {
         "desc": "红点清除入口",
-        "next": [
-            "RedDotClearStart",
-            "[JumpBack]NavigationEnterHall"
-        ],
         "action": {
             "type": "Custom",
             "param": {
                 "custom_action": "RuntimeQuotaCheck"
             }
-        }
+        },
+        "next": [
+            "RedDotClearStart",
+            "[JumpBack]NavigationEnterHall"
+        ]
     },
     "RedDotClearStart": {
         "desc": "红点清除",
@@ -23,6 +23,7 @@
             }
         },
         "next": [
+            "[JumpBack]CommonClosePage",
             "[JumpBack]RedDotClearCashShop",
             "[JumpBack]RedDotClearNotice",
             "CommonEndTask"

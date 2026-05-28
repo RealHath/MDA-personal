@@ -19,12 +19,14 @@ MDA is a game automation assistant built on [MaaFramework](https://github.com/Ma
 
 ## Member Features
 
-To provide a more stable and efficient automation experience, this project is currently **maintained and updated full-time**. Due to the significant time and effort required for ongoing development, adapting to game updates, and maintaining the project, MDA adopts a **partial features available via sponsorship** model to ensure the long-term healthy development of the project.
+To provide a more stable and efficient automation experience, this project is currently **maintained and updated full-time**. Due to the significant time and effort required for ongoing development, adapting to game updates, and maintaining the project, MDA adopts a **daily runtime quota by membership tier** model to ensure the long-term healthy development of the project.
 
 Details are as follows:
 
-- **Member Task标识**: In the task list, tasks prefixed with the orange **🍊** marker are exclusive to members.
-- **Sponsorship Method**: When you attempt to run any member task marked with 🍊, **a sponsorship link will be automatically displayed in the run log**. You can then sponsor the project through the link.
+- **All features available**: Free users can use all tasks. Tasks are no longer divided into member-only tasks with the 🍊 marker.
+- **Daily runtime quota**: Different membership tiers provide different daily runtime limits. The default free tier is **Orange Free**, with **10 minutes** of runtime per day.
+- **Quota reset time**: Daily runtime quota refreshes by tier at **4:00 AM** every day.
+- **Sponsorship Method**: When running tasks, the run log displays your current tier, today's remaining quota, and the device binding/subscription link. You can sponsor the project through that link.
 
 Thank you to all contributors for their efforts, and to every user for their understanding and support! Your sponsorship is the biggest motivation for me to continuously optimize MDA.
 
@@ -70,17 +72,10 @@ Recommended approach:
 - After enabling debug mode, **only run the task that has the issue**
 - Stop immediately after reproducing the problem and prepare to package the logs
 
-### Step 3: Package the Logs
+### Step 3: Export the Logs
 
 1. Click the **Export Logs** icon next to **Run Log** in the bottom-right corner
-2. In the `debug` folder that opens, find the generated archive and **extract it**
-3. Drag the **`vision` folder** from the same directory into the extracted folder
-4. Verify the folder contains the following:
-    - `vision` folder
-    - `config` folder
-    - `XXXX-XX-XX-X.log`
-    - `go-service.log`
-    - `maafw.log`
-5. **Re-compress** the entire folder as a ZIP file and send it to the developer
+2. In the `debug` folder that opens, find the generated archive
+3. Send the archive to the developer
 
 > 💡 After submitting feedback, it's recommended to **delete the old `vision` folder** and restart the program. This keeps debug images from different issues separate and makes troubleshooting easier.

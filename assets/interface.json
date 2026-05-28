@@ -67,9 +67,7 @@
     "resource": [
         {
             "name": "国际服",
-            "path": [
-                "./resource"
-            ]
+            "path": ["./resource"]
         }
     ],
     "agent": {
@@ -110,6 +108,7 @@
         "tasks/LargeEvent.json",
         "tasks/SmallEvent.json",
         "tasks/preset/DailyFull.json",
-        "tasks/preset/QuickDaily.json"
+        "tasks/preset/QuickDaily.json",
+        "tasks/preset/SelfUse.json"
     ]
 }

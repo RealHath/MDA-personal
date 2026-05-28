@@ -1,15 +1,15 @@
 {
     "OutpostMain": {
-        "next": [
-            "HallEnterOutpost",
-            "[JumpBack]NavigationEnterHall"
-        ],
         "action": {
             "type": "Custom",
             "param": {
                 "custom_action": "RuntimeQuotaCheck"
             }
-        }
+        },
+        "next": [
+            "HallEnterOutpost",
+            "[JumpBack]NavigationEnterHall"
+        ]
     },
     "HallEnterOutpost": {
         "desc": "进入前哨基地",

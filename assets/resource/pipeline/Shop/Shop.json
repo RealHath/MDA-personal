@@ -1,15 +1,15 @@
 {
     "ShopMain": {
-        "next": [
-            "HallEnterShop",
-            "[JumpBack]NavigationEnterHall"
-        ],
         "action": {
             "type": "Custom",
             "param": {
                 "custom_action": "RuntimeQuotaCheck"
             }
-        }
+        },
+        "next": [
+            "HallEnterShop",
+            "[JumpBack]NavigationEnterHall"
+        ]
     },
     "HallEnterShop": {
         "desc": "进入商店",

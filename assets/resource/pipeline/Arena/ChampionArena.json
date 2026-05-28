@@ -1,7 +1,7 @@
 {
     "ArenaEnterChampionArena": {
-        "max_hit": 5,
         "desc": "进入冠军竞技场",
+        "max_hit": 5,
         "recognition": {
             "type": "And",
             "param": {
