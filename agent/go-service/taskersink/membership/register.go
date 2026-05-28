@@ -6,4 +6,5 @@ import maa "github.com/MaaXYZ/maa-framework-go/v4"
 func Register() {
 	maa.AgentServerRegisterCustomAction("MembershipCheck", &MembershipCheckAction{})
 	maa.AgentServerRegisterCustomAction("RuntimeQuotaCheck", &RuntimeQuotaCheckAction{})
+	maa.AgentServerAddTaskerSink(&RuntimeTracker{})
 }
