@@ -9,11 +9,19 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-var appVersion string
+var (
+	appVersion string
+	clientName string
+)
 
 // SetVersion sets the application version for debug-mode detection.
 func SetVersion(v string) {
 	appVersion = v
+}
+
+// SetClientName sets the PI client name for debug-mode detection.
+func SetClientName(v string) {
+	clientName = v
 }
 
 // isDebugVersion returns true when the version is below 1.0.0 (dev builds, pre-release).
@@ -31,6 +39,10 @@ func isDebugVersion() bool {
 		return true
 	}
 	return major < 1
+}
+
+func isVSCodeClient() bool {
+	return strings.EqualFold(clientName, "VsCode")
 }
 
 // MembershipStatus represents the current membership state.
