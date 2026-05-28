@@ -45,6 +45,7 @@ type MembershipStatus struct {
 	RemainingDays       int
 	DailyRuntimeMinutes int
 	AllFeaturesUnlocked bool
+	UnlimitedRuntime    bool
 	IsMember            bool
 	UserID              string
 	DeviceCode          DeviceCodeV7
@@ -99,6 +100,7 @@ func checkMembership() *MembershipStatus {
 		RemainingDays:       9999,
 		DailyRuntimeMinutes: 180,
 		AllFeaturesUnlocked: true,
+		UnlimitedRuntime:    true,
 		IsMember:            true,
 		DeviceCode:          deviceCode,
 	}
