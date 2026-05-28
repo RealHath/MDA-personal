@@ -64,6 +64,7 @@ jobs:
             echo "Merge conflicts detected, auto-resolving fork-specific files"
             for f in \
               agent/go-service/taskersink/membership/action.go \
+              agent/go-service/taskersink/membership/memberdata.go \
               agent/go-service/taskersink/membership/register.go; do
               if [ -f "$f" ]; then
                 git checkout --ours -- "$f"
@@ -73,9 +74,10 @@ jobs:
             git commit --no-edit
           fi
 
-          # 合并完成后，强制保留 action.go 和 register.go 的 fork 版本
+          # 合并完成后，强制保留 memberdata.go/action.go/register.go 的 fork 版本
           for f in \
             agent/go-service/taskersink/membership/action.go \
+            agent/go-service/taskersink/membership/memberdata.go \
             agent/go-service/taskersink/membership/register.go; do
             git checkout HEAD~1 -- "$f"
             git add "$f"
@@ -90,6 +92,11 @@ jobs:
             fs.writeFileSync(path, JSON.stringify(cfg, null, 4) + '\n');
           "
           git add assets/interface.json
+
+          # 删除上游带过来的 format.yml（GITHUB_TOKEN 无法推送 workflow 文件）
+          rm -f .github/workflows/format.yml
+          git add .github/workflows/format.yml 2>/dev/null || true
+
           git commit --no-edit -m "chore: preserve fork-specific overrides" || true
 
           git push origin main
