@@ -10,20 +10,11 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-type MembershipCheckAction struct{}
-
 type RuntimeQuotaCheckAction struct{}
 
-var (
-	_ maa.CustomActionRunner = &MembershipCheckAction{}
-	_ maa.CustomActionRunner = &RuntimeQuotaCheckAction{}
-)
+var _ maa.CustomActionRunner = &RuntimeQuotaCheckAction{}
 
 var notifyOnce sync.Once
-
-func (a *MembershipCheckAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
-	return runRuntimeQuotaCheck(ctx)
-}
 
 func (a *RuntimeQuotaCheckAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
 	return runRuntimeQuotaCheck(ctx)

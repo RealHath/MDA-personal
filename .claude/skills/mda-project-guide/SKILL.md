@@ -184,8 +184,6 @@ MDA 存在 `agent/go-service/`，当前包含：
 - `pkg/resource`
 - `pkg/i18n`
 - `pkg/maafocus`
-- `common/myaction`
-- `common/myreco`
 - `taskersink/aspectratio`
 - `taskersink/hdrcheck`
 - `taskersink/processcheck`
