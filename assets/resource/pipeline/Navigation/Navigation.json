@@ -1,5 +1,5 @@
 {
-    "NavigationEnterHall": {
+    "NavigationReturnHallFlow": {
         "desc": "进入大厅",
         "anchor": "NeedCheck",
         "timeout": 120000,
@@ -11,7 +11,6 @@
             "[JumpBack]NavigationClickHomeButton",
             "[JumpBack]NavigationSkipPlot",
             "[JumpBack]CommonCloseSale",
-            "[JumpBack]LoginRewardClaim",
             "[JumpBack]CommonConfirmReward",
             "[JumpBack]NavigationOutpostBack",
             "NavigationClickFreeState",
@@ -87,7 +86,7 @@
             "type": "And",
             "param": {
                 "all_of": [
-                    "CommonBellVisible"
+                    "CommonMailVisible"
                 ]
             }
         }
@@ -107,7 +106,7 @@
             "type": "Click"
         },
         "next": [
-            "NavigationNoticeFlow",
+            "NavigationMailFlow",
             "[Anchor]NeedCheck"
         ]
     },
@@ -164,6 +163,21 @@
             "CommonClosePage"
         ]
     },
+    "NavigationMailFlow": {
+        "desc": "邮件流程",
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    "CommonMailVisible"
+                ]
+            }
+        },
+        "next": [
+            "[JumpBack]CommonClosePage",
+            "CommonEndTask"
+        ]
+    },
     "NavigationClickHall": {
         "desc": "点击大厅",
         "recognition": {
@@ -184,12 +198,12 @@
             "type": "Click"
         }
     },
-    "HallEnterArk": {
+    "NavigationEnterArkFlow": {
         "desc": "进入方舟",
         "next": [
             "NavigationArkEntered",
             "NavigationClickArk",
-            "[JumpBack]NavigationEnterHall"
+            "[JumpBack]NavigationReturnHallFlow"
         ]
     },
     "NavigationArkEntered": {
@@ -274,6 +288,23 @@
                 ],
                 "template": [
                     "Common/Bell.png"
+                ]
+            }
+        }
+    },
+    "CommonMailVisible": {
+        "desc": "右上角邮件标识",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1211,
+                    9,
+                    30,
+                    31
+                ],
+                "template": [
+                    "Common/Mail.png"
                 ]
             }
         }

@@ -17,7 +17,9 @@
                     "option": {
                         "CommonShopFreeGoods": "Yes",
                         "CommonShopCoreDustCase": "No",
-                        "RecyclingShopList": ["Gem"]
+                        "RecyclingShopList": [
+                            "Gem"
+                        ]
                     }
                 },
                 {
@@ -89,7 +91,7 @@
                 {
                     "name": "SmallEvent",
                     "option": {
-                        "SmallEventTheme": "BSideIdol",
+                        "SmallEventTheme": "BitterSpice",
                         "SmallEventContent": [
                             "SmallEventChallenge",
                             "SmallEventStory",
