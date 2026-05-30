@@ -96,6 +96,8 @@
     "option.DailyRewardsPassMain.label": "Pass奖励",
     "option.DailyRewardsDailyLogin.label": "每日登录奖励 [1.5x]",
     "option.DailyRewardsFreeRecruit.label": "周年庆免费招募",
+    "task.SoloRaid.label": "单人突击",
+    "task.SoloRaid.description": "进入单人突击界面，完成关卡挑战或快速战斗",
     "task.MapPushing.label": "自动推图 [5x]",
     "task.MapPushing.description": "需要单独勾选，在地图中靠近怪的地方点击启动，会自动点击怪物进行战斗和触发机关",
     "task.RedDotClear.label": "清除红点",

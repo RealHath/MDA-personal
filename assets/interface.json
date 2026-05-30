@@ -103,6 +103,7 @@
         "tasks/Advise.json",
         "tasks/CoordinatedOperations.json",
         "tasks/DailyRewards.json",
+        "tasks/SoloRaid.json",
         "tasks/MapPushing.json",
         "tasks/RedDotClear.json",
         "tasks/LargeEvent.json",

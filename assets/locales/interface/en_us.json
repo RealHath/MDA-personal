@@ -96,6 +96,8 @@
     "option.DailyRewardsPassMain.label": "Pass Rewards",
     "option.DailyRewardsDailyLogin.label": "Daily Login Rewards [1.5x]",
     "option.DailyRewardsFreeRecruit.label": "Anniversary Free Recruitment",
+    "task.SoloRaid.label": "Solo Raid",
+    "task.SoloRaid.description": "Enter the Solo Raid interface and complete stage challenge or quick battle",
     "task.MapPushing.label": "Auto Map Pushing [5x]",
     "task.MapPushing.description": "Must be selected separately. Click to start near monsters on the map; it will automatically click monsters for battle and trigger mechanisms",
     "task.RedDotClear.label": "Clear Red Dots",
