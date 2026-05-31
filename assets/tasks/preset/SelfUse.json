@@ -92,6 +92,9 @@
                     }
                 },
                 {
+                    "name": "SoloRaid"
+                },
+                {
                     "name": "SmallEvent",
                     "option": {
                         "SmallEventTheme": "BitterSpice",
