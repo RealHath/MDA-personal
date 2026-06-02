@@ -53,7 +53,7 @@
             "[JumpBack]DailyRewardsClickPassRedDot",
             "DailyRewardsPassFlow",
             "[JumpBack]CommonClosePage",
-            "CommonEndTask"
+            "CommonClickBlank"
         ]
     },
     "DailyRewardsClickPassRedDot": {
@@ -128,7 +128,8 @@
                 "template": [
                     "Common/RedDot.png"
                 ],
-                "threshold": 0.75
+                "threshold": 0.75,
+                "index": -1
             }
         },
         "action": {
