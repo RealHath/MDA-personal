@@ -28,6 +28,7 @@
             "[JumpBack]RedDotClearNotice",
             "[JumpBack]RedDotClearSubMenu",
             "[JumpBack]RedDotClearProfilePage",
+            "[JumpBack]RedDotClearArchives",
             "CommonEndTask"
         ]
     }
