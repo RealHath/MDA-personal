@@ -86,7 +86,7 @@ jobs:
       'macos-latest' || 'ubuntu-latest') }}
     strategy:
       matrix:
-        os: [ win, linux, macos ]
+        os: [ win, macos, linux ]
         arch: [ x86_64, aarch64 ]
       fail-fast: false
 

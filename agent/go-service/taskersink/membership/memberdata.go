@@ -55,8 +55,10 @@ type MembershipStatus struct {
 	StartsOn            string
 	ExpiresOn           string
 	RemainingDays       int
-	DailyRuntimeMinutes int
-	AllFeaturesUnlocked bool
+	DailyRuntimeMinutes         int
+	RegularDailyRuntimeMinutes  int
+	SpecialPeriodRuntimeMinutes int
+	AllFeaturesUnlocked         bool
 	UnlimitedRuntime    bool
 	IsMember            bool
 	UserID              string

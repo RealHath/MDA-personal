@@ -57,11 +57,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config merge.ours.driver true
 
-          # 合并上游代码，保留 fork 特有的跳过验证版本
-          if git merge upstream/main --no-edit; then
-            echo "Merge succeeded"
-          else
-            echo "Merge conflicts detected, auto-resolving fork-specific files"
+          # 保存 fork 版本会员校验文件（合并后恢复用）
+          for f in \
+            agent/go-service/taskersink/membership/action.go \
+            agent/go-service/taskersink/membership/memberdata.go \
+            agent/go-service/taskersink/membership/register.go; do
+            cp "$f" "/tmp/$(basename $f).bak"
+          done
+
+          # 合并上游代码
+          git merge upstream/main --no-edit || true
+          if [ -f ".git/MERGE_MSG" ]; then
+            # 有冲突时保留 fork 版本
             for f in \
               agent/go-service/taskersink/membership/action.go \
               agent/go-service/taskersink/membership/memberdata.go \
@@ -74,16 +81,19 @@ jobs:
             git commit --no-edit
           fi
 
-          # 合并完成后，强制保留 memberdata.go/action.go/register.go 的 fork 版本
+          # 恢复 fork 版本的会员校验文件
           for f in \
             agent/go-service/taskersink/membership/action.go \
             agent/go-service/taskersink/membership/memberdata.go \
             agent/go-service/taskersink/membership/register.go; do
-            git checkout HEAD~1 -- "$f"
+            cp "/tmp/$(basename $f).bak" "$f"
             git add "$f"
           done
 
-          # 选择性覆盖 interface.json 中 fork 特有的字段
+          # package-lock.json 始终使用上游版本
+          git checkout upstream/main -- package-lock.json 2>/dev/null && git add package-lock.json || true
+
+          # fork 特有字段覆盖
           node -e "
             const fs = require('fs');
             const path = 'assets/interface.json';
