@@ -42,8 +42,6 @@ func runRuntimeQuotaCheck(ctx *maa.Context, route quotaRoute) bool {
 		return false
 	}
 
-	maybePrintRenewalReminder(ctx, status)
-
 	snapshot, ok, err := EnsureQuotaRouteAvailable(status, route)
 	if err != nil {
 		log.Warn().Err(err).Msg("RuntimeQuotaCheck: failed to read local quota state")
