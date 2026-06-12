@@ -36,9 +36,10 @@
         "action": {
             "type": "Click"
         },
+        "post_wait_freezes": 200,
         "next": [
             "RedDotClearBlaBlaFlow",
-            "[JumpBack]CommonClickBlank"
+            "RedDotClearBlaBlaClickEntry" //兜底
         ]
     },
     "BlaBlaVisible": {
@@ -120,7 +121,7 @@
                     55
                 ],
                 "template": [
-                    "Common/RedDot.png",
+                    "RedDotClear/BlaBlaRedDot.png",
                     "RedDotClear/BlaBlaNew.png"
                 ],
                 "threshold": [
@@ -262,6 +263,9 @@
                 ],
                 "template": [
                     "RedDotClear/BlaBlaContinue.png"
+                ],
+                "threshold": [
+                    0.85
                 ]
             }
         },
