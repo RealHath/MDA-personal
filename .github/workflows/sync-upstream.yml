@@ -57,20 +57,26 @@ jobs:
           git config user.name "github-actions[bot]"
           git config merge.ours.driver true
 
-          # 备份 fork 版本的 action.go（合并后恢复用）
-          cp agent/go-service/taskersink/membership/action.go "/tmp/action.go.bak"
+          # 备份 fork 版本的 register.go（合并后恢复用）
+          cp agent/go-service/taskersink/membership/register.go "/tmp/register.go.bak"
 
           # 合并上游代码
           git merge upstream/main --no-edit || true
           if [ -f ".git/MERGE_MSG" ]; then
-            # 有冲突时保留 fork 版本
-            git checkout --ours -- agent/go-service/taskersink/membership/action.go
-            git add agent/go-service/taskersink/membership/action.go
+            # 有冲突时使用上游版本
+            git checkout --theirs -- agent/go-service/taskersink/membership/action.go
+            git checkout --theirs -- agent/go-service/taskersink/membership/runtime_tracker.go
+            git checkout --theirs -- agent/go-service/taskersink/membership/memberdata.go
+            git add agent/go-service/taskersink/membership/
             git commit --no-edit
           fi
 
-          # 恢复 fork 版本的 action.go
-          cp "/tmp/action.go.bak" agent/go-service/taskersink/membership/action.go
+          # 恢复 fork 版本的 register.go（唯一本地修改的文件）
+          cp "/tmp/register.go.bak" agent/go-service/taskersink/membership/register.go
+          git add agent/go-service/taskersink/membership/register.go
+
+          # 重置 action.go 到上游版本（确保 fork 不会意外修改）
+          git checkout upstream/main -- agent/go-service/taskersink/membership/action.go
           git add agent/go-service/taskersink/membership/action.go
 
           # package-lock.json 始终使用上游版本
